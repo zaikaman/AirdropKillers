@@ -56,6 +56,11 @@ export default function DashboardPage() {
     )
   }
 
+  const downloadUrls = {
+    Kuroro: 'https://drive.google.com/file/d/1cDS3-0JWY8rlu0XM2MsBevYlkqWFxZRG/view?usp=sharing',
+    Blum: 'https://drive.google.com/file/d/1IDL_OpBdk8CDuwaQYLUenXRxQZksHkMN/view?usp=sharing'
+  }
+
   return (
     <div className="min-h-screen bg-dark pt-20">
       <div className="container mx-auto px-4 py-16">
@@ -88,9 +93,21 @@ export default function DashboardPage() {
                         <span className="text-green-500">
                           Đã kích hoạt
                           {tools.find(t => t.name === 'Kuroro')?.key && (
-                            <div className="mt-2 text-sm font-mono">
-                              Key: {tools.find(t => t.name === 'Kuroro')?.key}
-                            </div>
+                            <>
+                              <div className="mt-2 text-sm font-mono">
+                                Key: {tools.find(t => t.name === 'Kuroro')?.key}
+                              </div>
+                              <div className="mt-2">
+                                <a 
+                                  href={downloadUrls.Kuroro}
+                                  target="_blank"
+                                  rel="noopener noreferrer" 
+                                  className="text-primary hover:underline"
+                                >
+                                  Tải tool tại đây
+                                </a>
+                              </div>
+                            </>
                           )}
                         </span>
                       )
@@ -106,9 +123,21 @@ export default function DashboardPage() {
                         <span className="text-green-500">
                           Đã kích hoạt
                           {tools.find(t => t.name === 'Blum')?.key && (
-                            <div className="mt-2 text-sm font-mono">
-                              Key: {tools.find(t => t.name === 'Blum')?.key}
-                            </div>
+                            <>
+                              <div className="mt-2 text-sm font-mono">
+                                Key: {tools.find(t => t.name === 'Blum')?.key}
+                              </div>
+                              <div className="mt-2">
+                                <a 
+                                  href={downloadUrls.Blum}
+                                  target="_blank"
+                                  rel="noopener noreferrer" 
+                                  className="text-primary hover:underline"
+                                >
+                                  Tải tool tại đây
+                                </a>
+                              </div>
+                            </>
                           )}
                         </span>
                       )
