@@ -6,6 +6,13 @@ function generateRandomPart() {
   return Math.random().toString(36).substring(2, 6).toUpperCase()
 }
 
+type ProductSlug = 'kuroro' | 'blum'
+
+const downloadUrls: Record<ProductSlug, string> = {
+  kuroro: 'https://drive.google.com/file/d/1cDS3-0JWY8rlu0XM2MsBevYlkqWFxZRG/view?usp=sharing',
+  blum: 'https://drive.google.com/file/d/1fidxwEYmWET28vZkY2BvDPlooraN05KC/view'
+}
+
 export async function POST(req: Request) {
   try {
     const token = req.headers.get('authorization')?.split(' ')[1]
@@ -45,14 +52,9 @@ export async function POST(req: Request) {
       }
     })
 
-    const downloadUrls = {
-      kuroro: 'https://drive.google.com/file/d/1cDS3-0JWY8rlu0XM2MsBevYlkqWFxZRG/view?usp=sharing',
-      blum: 'https://drive.google.com/file/d/1fidxwEYmWET28vZkY2BvDPlooraN05KC/view'
-    }
-
     return NextResponse.json({ 
       key,
-      downloadUrl: downloadUrls[productSlug]
+      downloadUrl: downloadUrls[productSlug as ProductSlug]
     })
   } catch {
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
