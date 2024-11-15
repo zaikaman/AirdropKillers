@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgres://default:BOqb3QaDuNC7@ep-dry-tree-a4025s4m.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  tools     Tool[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tool {
+  id          String   @id @default(cuid())
+  name        String
+  key         String   @unique
+  activated   Boolean  @default(false)
+  hardwareId  String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+} 
