@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 export default function Hero() {
   return (
     <div className="relative min-h-screen bg-dark overflow-hidden">
@@ -15,9 +17,12 @@ export default function Hero() {
             Tiết kiệm thời gian và công sức với công cụ auto click thông minh.
           </p>
           <div className="flex gap-4">
-            <button className="px-8 py-3 bg-primary hover:bg-primary-dark rounded-lg text-white font-medium transition-all">
+            <Link 
+              href="/products"
+              className="px-8 py-3 bg-primary hover:bg-primary-dark rounded-lg text-white font-medium transition-all"
+            >
               Mua Tool Ngay
-            </button>
+            </Link>
             <button className="px-8 py-3 border border-primary text-primary hover:bg-primary/10 rounded-lg font-medium transition-all">
               Xem Demo
             </button>
