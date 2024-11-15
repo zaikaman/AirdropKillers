@@ -10,7 +10,7 @@ type ProductSlug = 'kuroro' | 'blum'
 
 const downloadUrls: Record<ProductSlug, string> = {
   kuroro: 'https://drive.google.com/file/d/1cDS3-0JWY8rlu0XM2MsBevYlkqWFxZRG/view?usp=sharing',
-  blum: 'https://drive.google.com/file/d/1fidxwEYmWET28vZkY2BvDPlooraN05KC/view'
+  blum: 'https://drive.google.com/file/d/1IDL_OpBdk8CDuwaQYLUenXRxQZksHkMN/view?usp=sharing'
 }
 
 export async function POST(req: Request) {
