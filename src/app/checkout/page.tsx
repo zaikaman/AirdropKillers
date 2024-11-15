@@ -126,8 +126,8 @@ function CheckoutContent() {
                 <div className="bg-dark/50 p-4 rounded-lg">
                   <div className="space-y-2 text-sm">
                     <p>Ngân hàng: <span className="font-medium">MB Bank</span></p>
-                    <p>Số tài khoản: <span className="font-medium">0123456789</span></p>
-                    <p>Chủ tài khoản: <span className="font-medium">NGUYEN VAN A</span></p>
+                    <p>Số tài khoản: <span className="font-medium">7040117062004</span></p>
+                    <p>Chủ tài khoản: <span className="font-medium">DINH PHUC THINH</span></p>
                     <p>Nội dung CK: <span className="font-medium">{product.name.toUpperCase()}_0123</span></p>
                   </div>
                 </div>
