@@ -100,7 +100,21 @@ export default function DashboardPage() {
                 </div>
                 <div className="p-4 border border-gray-800 rounded-lg">
                   <div className="font-bold mb-2">Blum</div>
-                  <div className="text-gray-400">Trạng thái: Chưa kích hoạt</div>
+                  <div className="text-gray-400">
+                    Trạng thái: {tools.some(t => t.name === 'Blum' && t.activated) 
+                      ? (
+                        <span className="text-green-500">
+                          Đã kích hoạt
+                          {tools.find(t => t.name === 'Blum')?.key && (
+                            <div className="mt-2 text-sm font-mono">
+                              Key: {tools.find(t => t.name === 'Blum')?.key}
+                            </div>
+                          )}
+                        </span>
+                      )
+                      : 'Chưa kích hoạt'
+                    }
+                  </div>
                 </div>
               </div>
             </div>
