@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     const decoded = jwt.verify(token, "airdrop-killers-secret-key") as { userId: string }
     const { productSlug } = await req.json()
     
-    if (productSlug !== 'kuroro') {
+    if (!['kuroro', 'blum'].includes(productSlug)) {
       return NextResponse.json({ error: 'Invalid product' }, { status: 400 })
     }
 
@@ -33,11 +33,12 @@ export async function POST(req: Request) {
       }, { status: 400 })
     }
 
-    const key = `KURORO-${generateRandomPart()}-${generateRandomPart()}-${generateRandomPart()}`
+    const keyPrefix = productSlug.toUpperCase()
+    const key = `${keyPrefix}-${generateRandomPart()}-${generateRandomPart()}-${generateRandomPart()}`
     
     await prisma.tool.create({
       data: {
-        name: 'Kuroro',
+        name: productSlug === 'kuroro' ? 'Kuroro' : 'Blum',
         key,
         activated: true,
         userId: decoded.userId
