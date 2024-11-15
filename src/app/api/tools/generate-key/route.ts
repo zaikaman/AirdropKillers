@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     const existingTool = await prisma.tool.findFirst({
       where: {
         userId: decoded.userId,
-        name: 'Kuroro'
+        name: productSlug === 'kuroro' ? 'Kuroro' : 'Blum'
       }
     })
 
@@ -45,9 +45,14 @@ export async function POST(req: Request) {
       }
     })
 
+    const downloadUrls = {
+      kuroro: 'https://drive.google.com/file/d/1cDS3-0JWY8rlu0XM2MsBevYlkqWFxZRG/view?usp=sharing',
+      blum: 'https://drive.google.com/file/d/1fidxwEYmWET28vZkY2BvDPlooraN05KC/view'
+    }
+
     return NextResponse.json({ 
       key,
-      downloadUrl: 'https://drive.google.com/file/d/1cDS3-0JWY8rlu0XM2MsBevYlkqWFxZRG/view?usp=sharing'
+      downloadUrl: downloadUrls[productSlug]
     })
   } catch {
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
