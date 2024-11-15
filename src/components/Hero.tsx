@@ -19,13 +19,16 @@ export default function Hero() {
           <div className="flex gap-4">
             <Link 
               href="/products"
-              className="px-8 py-3 bg-primary hover:bg-primary-dark rounded-lg text-white font-medium transition-all"
+              className="inline-block px-8 py-3 bg-primary hover:bg-primary-dark rounded-lg text-white font-medium transition-all cursor-pointer"
             >
               Mua Tool Ngay
             </Link>
-            <button className="px-8 py-3 border border-primary text-primary hover:bg-primary/10 rounded-lg font-medium transition-all">
+            <Link
+              href="#demo"
+              className="inline-block px-8 py-3 border border-primary text-primary hover:bg-primary/10 rounded-lg font-medium transition-all cursor-pointer"
+            >
               Xem Demo
-            </button>
+            </Link>
           </div>
         </div>
       </div>
