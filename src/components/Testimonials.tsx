@@ -15,7 +15,7 @@ export default function Testimonials() {
       rating: 5
     },
     {
-      name: 'Lê Minh Cường',
+      name: 'Lê Minh Thiện',
       role: 'Chuyên Gia Blockchain',
       image: '/avatars/michael.jpg',
       content: 'Khoản đầu tư tốt nhất cho việc săn airdrop. Công cụ phân tích giúp tôi theo dõi mọi thứ hiệu quả.',
