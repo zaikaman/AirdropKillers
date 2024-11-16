@@ -54,7 +54,7 @@ export async function GET(req: Request) {
         },
       ],
       returnUrl: `${YOUR_DOMAIN}/checkout/success?product=${productSlug}`,
-      cancelUrl: `${YOUR_DOMAIN}/checkout/cancel`,
+      cancelUrl: `${YOUR_DOMAIN}/checkout/cancel?product=${productSlug}`,
     }
 
     const paymentLinkResponse = await payOS.createPaymentLink(body)

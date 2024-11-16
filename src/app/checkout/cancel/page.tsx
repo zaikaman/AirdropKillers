@@ -1,9 +1,19 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function CheckoutCancelPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const productSlug = searchParams?.get('product')
+
+  const handleRetry = () => {
+    if (productSlug) {
+      router.push(`/checkout?product=${productSlug}`)
+    } else {
+      router.push('/')
+    }
+  }
 
   return (
     <div className="min-h-screen bg-dark pt-20">
@@ -16,7 +26,7 @@ export default function CheckoutCancelPage() {
           
           <div className="space-x-4">
             <button
-              onClick={() => router.back()}
+              onClick={handleRetry}
               className="px-6 py-3 bg-primary hover:bg-primary-dark rounded-lg text-white font-medium transition-all"
             >
               Thử Lại
