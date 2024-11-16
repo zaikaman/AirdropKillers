@@ -53,7 +53,7 @@ export async function GET(req: Request) {
           price: amount,
         },
       ],
-      returnUrl: `${YOUR_DOMAIN}/checkout/success`,
+      returnUrl: `${YOUR_DOMAIN}/checkout/success?product=${productSlug}`,
       cancelUrl: `${YOUR_DOMAIN}/checkout/cancel`,
     }
 
