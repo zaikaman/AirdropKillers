@@ -20,7 +20,7 @@ function CheckoutContent() {
       window.location.href = '/login'
       return
     }
-    window.location.href = `/api/create-payment-link?product=${product.slug}`
+    window.location.href = `/api/create-payment-link?product=${product.slug}&token=${token}`
   }
 
   if (!product) {
