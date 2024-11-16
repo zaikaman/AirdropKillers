@@ -46,7 +46,7 @@ export async function GET(req: Request) {
     const body = {
       orderCode: Number(String(Date.now()).slice(-6)),
       amount: amount,
-      description: `${product.slug} ${user.email}`,
+      description: product.slug.slice(0, 25),
       items: [
         {
           name: product.name,
