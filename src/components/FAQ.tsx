@@ -12,7 +12,7 @@ export default function FAQ() {
       answer: 'Tool sẽ tự động nhận diện và thực hiện các thao tác click cần thiết trên miniapp Telegram. Bạn chỉ cần cài đặt tool và để nó hoạt động tự động.'
     },
     {
-      question: 'Có An Toàn Để Sử Dụng Không?',
+      question: 'Tool Có An Toàn Để Sử Dụng Không?',
       answer: 'Hoàn toàn an toàn. Tool chỉ thực hiện các thao tác click đơn giản, không can thiệp vào dữ liệu hay thông tin cá nhân của bạn trên Telegram.'
     },
     {
