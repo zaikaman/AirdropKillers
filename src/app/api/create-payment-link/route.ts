@@ -20,8 +20,8 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: 'Product not found' }, { status: 404 })
     }
 
-    const amount = parseInt(product.price.replace(/\D/g, '')) * 1000
-
+    const amount = parseInt(product.price.replace(/\D/g, ''))
+    
     const body = {
       orderCode: Number(String(Date.now()).slice(-6)),
       amount: amount,
