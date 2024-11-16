@@ -40,7 +40,9 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: 'Product not found' }, { status: 404 })
     }
 
+    // Parse amount and validate
     const amount = parseInt(product.price.replace(/\D/g, ''))
+    console.log('Amount before PayOS:', amount)
     
     const body = {
       orderCode: Number(String(Date.now()).slice(-6)),
@@ -57,15 +59,34 @@ export async function GET(req: Request) {
       cancelUrl: `${YOUR_DOMAIN}/checkout/cancel?product=${productSlug}`,
     }
 
-    console.log('Product slug:', productSlug)
-    console.log('Product found:', product)
-    console.log('Amount:', amount)
-    console.log('PayOS body:', body)
+    console.log('PayOS request body:', body)
 
-    const paymentLinkResponse = await payOS.createPaymentLink(body)
-    console.log('PayOS response:', paymentLinkResponse)
-    return NextResponse.redirect(paymentLinkResponse.checkoutUrl)
-  } catch {
-    return NextResponse.json({ message: 'Payment creation failed' }, { status: 500 })
+    try {
+      const paymentLinkResponse = await payOS.createPaymentLink(body)
+      console.log('PayOS response:', paymentLinkResponse)
+      return NextResponse.redirect(paymentLinkResponse.checkoutUrl)
+    } catch (payosError: any) {
+      console.error('PayOS error details:', {
+        message: payosError.message,
+        response: payosError.response?.data,
+        status: payosError.response?.status,
+      })
+      return NextResponse.json({ 
+        message: 'PayOS payment creation failed',
+        error: {
+          message: payosError.message,
+          response: payosError.response?.data,
+        }
+      }, { status: 500 })
+    }
+  } catch (error: any) {
+    console.error('General error:', {
+      message: error.message,
+      stack: error.stack
+    })
+    return NextResponse.json({ 
+      message: 'Server error',
+      error: error.message
+    }, { status: 500 })
   }
 } 
