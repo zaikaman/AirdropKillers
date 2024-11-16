@@ -1,17 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Suspense } from 'react'
+import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { products, Product } from '@/data/products'
 import Image from 'next/image'
 
 function CheckoutContent() {
   const [isLoading, setIsLoading] = useState(false)
-  const [toolKey, setToolKey] = useState('')
-  const [downloadUrl, setDownloadUrl] = useState('')
-  const router = useRouter()
   const searchParams = useSearchParams()
   const productSlug = searchParams?.get('product') || ''
   const product = products.find((p: Product) => p.slug === productSlug)
@@ -59,10 +54,6 @@ function CheckoutContent() {
                     <span>Giá sản phẩm</span>
                     <span>{product.price}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Phí dịch vụ</span>
-                    <span>0đ</span>
-                  </div>
                   <div className="border-t border-gray-700 pt-2 mt-2">
                     <div className="flex justify-between font-bold">
                       <span>Tổng cộng</span>
@@ -78,23 +69,16 @@ function CheckoutContent() {
               <h3 className="font-bold mb-4">Phương thức thanh toán</h3>
               
               <div className="space-y-4">
-                {toolKey ? (
-                  <div className="mt-8 p-6 bg-dark-light rounded-xl">
-                    <h3 className="font-bold mb-4">Thông tin kích hoạt</h3>
-                    <div className="space-y-4">
-                      <p>Key của bạn: <span className="font-mono font-bold text-primary">{toolKey}</span></p>
-                      <p>Link tải tool: <a href={downloadUrl} className="text-primary hover:underline">Nhấn vào đây</a></p>
-                    </div>
-                  </div>
-                ) : (
-                  <button 
-                    onClick={() => window.location.href = `/api/create-payment-link?product=${product.slug}`}
-                    disabled={isLoading}
-                    className="w-full py-3 bg-primary hover:bg-primary-dark rounded-lg text-white font-medium transition-all disabled:opacity-50"
-                  >
-                    {isLoading ? 'Đang xử lý...' : 'Thanh toán qua PayOS'}
-                  </button>
-                )}
+                <button 
+                  onClick={() => {
+                    setIsLoading(true)
+                    window.location.href = `/api/create-payment-link?product=${product.slug}`
+                  }}
+                  disabled={isLoading}
+                  className="w-full py-3 bg-primary hover:bg-primary-dark rounded-lg text-white font-medium transition-all disabled:opacity-50"
+                >
+                  {isLoading ? 'Đang xử lý...' : 'Thanh toán qua PayOS'}
+                </button>
               </div>
             </div>
           </div>
