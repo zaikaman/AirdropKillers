@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="relative container mx-auto px-4 py-32 z-10">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-6">
-            Tool Auto Click Telegram
+            Tool Auto Click Telegram Miniapp
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mb-8">
             Tự động hóa các thao tác click trên miniapp Telegram. 
