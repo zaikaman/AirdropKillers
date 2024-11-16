@@ -30,7 +30,9 @@ export default function LoginForm() {
 
       // Lưu token vào localStorage
       localStorage.setItem('token', json.token)
-      router.push('/dashboard')
+      
+      // Refresh trang và chuyển hướng
+      window.location.href = '/dashboard'
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message)
