@@ -26,43 +26,6 @@ function CheckoutContent() {
     )
   }
 
-  const handlePaymentConfirm = async () => {
-    setIsLoading(true)
-    try {
-      const token = localStorage.getItem('token')
-      if (!token) {
-        router.push('/login')
-        return
-      }
-
-      const res = await fetch('/api/tools/generate-key', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ productSlug })
-      })
-
-      const data = await res.json()
-      if (!res.ok) {
-        throw new Error(data.error || 'Có lỗi xảy ra')
-      }
-
-      setToolKey(data.key)
-      setDownloadUrl(data.downloadUrl)
-      router.refresh()
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        alert(error.message)
-      } else {
-        alert('Có lỗi xảy ra')
-      }
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   return (
     <div className="min-h-screen bg-dark pt-20">
       <div className="container mx-auto px-4 py-16">

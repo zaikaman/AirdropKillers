@@ -9,21 +9,18 @@ const payOS = new PayOS(
 )
 
 export async function GET(req: Request) {
+  const YOUR_DOMAIN = `https://airdrop-killers.vercel.app`
+
   try {
-    // Lấy slug sản phẩm từ URL search params
     const url = new URL(req.url)
     const productSlug = url.searchParams.get('product')
     
-    // Tìm thông tin sản phẩm
     const product = products.find(p => p.slug === productSlug)
     if (!product) {
-      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Product not found' }, { status: 404 })
     }
 
-    // Chuyển đổi giá từ string (VD: "40.000đ") sang number
-    const amount = parseInt(product.price.replace(/\D/g, '')) * 1000 // Chuyển đổi sang đơn vị VND
-    
-    const YOUR_DOMAIN = `https://airdrop-killers.vercel.app`
+    const amount = parseInt(product.price.replace(/\D/g, '')) * 1000
 
     const body = {
       orderCode: Number(String(Date.now()).slice(-6)),
@@ -42,7 +39,7 @@ export async function GET(req: Request) {
 
     const paymentLinkResponse = await payOS.createPaymentLink(body)
     return NextResponse.redirect(paymentLinkResponse.checkoutUrl)
-  } catch (error) {
-    return NextResponse.json({ error: 'Payment creation failed' }, { status: 500 })
+  } catch {
+    return NextResponse.json({ message: 'Payment creation failed' }, { status: 500 })
   }
 } 
