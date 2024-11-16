@@ -115,23 +115,6 @@ function CheckoutContent() {
               <h3 className="font-bold mb-4">Phương thức thanh toán</h3>
               
               <div className="space-y-4">
-                <div className="flex items-center gap-3 p-4 border border-gray-700 rounded-lg cursor-pointer hover:border-primary">
-                  <input type="radio" name="payment" id="bank" checked readOnly />
-                  <label htmlFor="bank" className="cursor-pointer">
-                    <div className="font-medium">Chuyển khoản ngân hàng</div>
-                    <div className="text-sm text-gray-400">MB Bank, Vietcombank, ...</div>
-                  </label>
-                </div>
-
-                <div className="bg-dark/50 p-4 rounded-lg">
-                  <div className="space-y-2 text-sm">
-                    <p>Ngân hàng: <span className="font-medium">MB Bank</span></p>
-                    <p>Số tài khoản: <span className="font-medium">7040117062004</span></p>
-                    <p>Chủ tài khoản: <span className="font-medium">DINH PHUC THINH</span></p>
-                    <p>Nội dung CK: <span className="font-medium">{product.name.toUpperCase()}_0123</span></p>
-                  </div>
-                </div>
-
                 {toolKey ? (
                   <div className="mt-8 p-6 bg-dark-light rounded-xl">
                     <h3 className="font-bold mb-4">Thông tin kích hoạt</h3>
@@ -142,11 +125,11 @@ function CheckoutContent() {
                   </div>
                 ) : (
                   <button 
-                    onClick={handlePaymentConfirm}
+                    onClick={() => window.location.href = `/api/create-payment-link?product=${product.slug}`}
                     disabled={isLoading}
                     className="w-full py-3 bg-primary hover:bg-primary-dark rounded-lg text-white font-medium transition-all disabled:opacity-50"
                   >
-                    {isLoading ? 'Đang xử lý...' : 'Xác nhận đã chuyển khoản'}
+                    {isLoading ? 'Đang xử lý...' : 'Thanh toán qua PayOS'}
                   </button>
                 )}
               </div>

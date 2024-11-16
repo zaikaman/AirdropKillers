@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@payos/node": "^1.0.10",
     "@prisma/client": "^5.22.0",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
