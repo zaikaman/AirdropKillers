@@ -1,9 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 export default function LoginForm() {
-  const router = useRouter()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
