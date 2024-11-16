@@ -11,6 +11,18 @@ function CheckoutContent() {
   const productSlug = searchParams?.get('product') || ''
   const product = products.find((p: Product) => p.slug === productSlug)
 
+  const handlePayment = () => {
+    if (!product) return
+    
+    setIsLoading(true)
+    const token = localStorage.getItem('token')
+    if (!token) {
+      window.location.href = '/login'
+      return
+    }
+    window.location.href = `/api/create-payment-link?product=${product.slug}`
+  }
+
   if (!product) {
     return (
       <div className="min-h-screen bg-dark pt-20">
@@ -70,10 +82,7 @@ function CheckoutContent() {
               
               <div className="space-y-4">
                 <button 
-                  onClick={() => {
-                    setIsLoading(true)
-                    window.location.href = `/api/create-payment-link?product=${product.slug}`
-                  }}
+                  onClick={handlePayment}
                   disabled={isLoading}
                   className="w-full py-3 bg-primary hover:bg-primary-dark rounded-lg text-white font-medium transition-all disabled:opacity-50"
                 >

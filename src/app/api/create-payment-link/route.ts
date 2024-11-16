@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import PayOS from '@payos/node'
 import { products } from '@/data/products'
+import jwt from 'jsonwebtoken'
 
 const payOS = new PayOS(
   "589c975c-fbc7-4526-804a-7c876d9629f9",
@@ -12,6 +13,15 @@ export async function GET(req: Request) {
   const YOUR_DOMAIN = `https://airdrop-killers.vercel.app`
 
   try {
+    // Get token from request header
+    const token = req.headers.get('authorization')?.split(' ')[1]
+    if (!token) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Decode token to get user email
+    const decoded = jwt.verify(token, "airdrop-killers-secret-key") as { email: string }
+    
     const url = new URL(req.url)
     const productSlug = url.searchParams.get('product')
     
@@ -25,7 +35,7 @@ export async function GET(req: Request) {
     const body = {
       orderCode: Number(String(Date.now()).slice(-6)),
       amount: amount,
-      description: `Thanh toán ${product.name}`,
+      description: `${product.slug} ${decoded.email}`,
       items: [
         {
           name: product.name,
