@@ -40,7 +40,6 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: 'Product not found' }, { status: 404 })
     }
 
-    // Parse amount and validate
     const amount = parseInt(product.price.replace(/\D/g, ''))
     console.log('Amount before PayOS:', amount)
     
@@ -65,12 +64,21 @@ export async function GET(req: Request) {
       const paymentLinkResponse = await payOS.createPaymentLink(body)
       console.log('PayOS response:', paymentLinkResponse)
       return NextResponse.redirect(paymentLinkResponse.checkoutUrl)
-    } catch (payosError: any) {
-      console.error('PayOS error details:', {
+    } catch (error: unknown) {
+      const payosError = error as {
+        message: string;
+        response?: {
+          data: unknown;
+          status: number;
+        };
+      }
+      
+      console.error('PayOS error:', {
         message: payosError.message,
         response: payosError.response?.data,
         status: payosError.response?.status,
       })
+      
       return NextResponse.json({ 
         message: 'PayOS payment creation failed',
         error: {
@@ -79,14 +87,16 @@ export async function GET(req: Request) {
         }
       }, { status: 500 })
     }
-  } catch (error: any) {
-    console.error('General error:', {
-      message: error.message,
-      stack: error.stack
+  } catch (error: unknown) {
+    const serverError = error as Error
+    console.error('Server error:', {
+      message: serverError.message,
+      stack: serverError.stack
     })
+    
     return NextResponse.json({ 
       message: 'Server error',
-      error: error.message
+      error: serverError.message
     }, { status: 500 })
   }
 } 
