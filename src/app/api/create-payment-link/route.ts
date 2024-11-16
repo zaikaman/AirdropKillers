@@ -57,7 +57,13 @@ export async function GET(req: Request) {
       cancelUrl: `${YOUR_DOMAIN}/checkout/cancel?product=${productSlug}`,
     }
 
+    console.log('Product slug:', productSlug)
+    console.log('Product found:', product)
+    console.log('Amount:', amount)
+    console.log('PayOS body:', body)
+
     const paymentLinkResponse = await payOS.createPaymentLink(body)
+    console.log('PayOS response:', paymentLinkResponse)
     return NextResponse.redirect(paymentLinkResponse.checkoutUrl)
   } catch {
     return NextResponse.json({ message: 'Payment creation failed' }, { status: 500 })
