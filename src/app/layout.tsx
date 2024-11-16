@@ -7,8 +7,16 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Airdrop Killers - Công Cụ Tự Động Airdrop',
-  description: 'Công cụ tự động hóa airdrop chuyên nghiệp hàng đầu cho người đam mê tiền mã hóa từ Airdrop Killers',
+  title: 'Airdrop Killers - Công Cụ',
+  description: 'Công cụ hỗ trợ Airdrop',
+  icons: {
+    icon: '/logo.png',
+    apple: [
+      { url: '/logo.png' },
+      { url: '/logo.png', sizes: '72x72' },
+      { url: '/logo.png', sizes: '114x114' },
+    ],
+  },
 }
 
 export default function RootLayout({
