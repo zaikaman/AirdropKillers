@@ -57,7 +57,7 @@ function CheckoutContent() {
 
       // Chuyển hướng sau khi thành công
       window.location.href = '/dashboard'
-    } catch (error) {
+    } catch {
       alert('Có lỗi xảy ra')
     } finally {
       setIsLoading(false)
