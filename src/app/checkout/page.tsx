@@ -4,7 +4,6 @@ import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { products, Product } from '@/data/products'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 
 function CheckoutContent() {
   const [isLoading, setIsLoading] = useState(false)
@@ -13,7 +12,6 @@ function CheckoutContent() {
   const searchParams = useSearchParams()
   const productSlug = searchParams?.get('product') || ''
   const product = products.find((p: Product) => p.slug === productSlug)
-  const router = useRouter()
 
   const handlePayment = () => {
     if (!product) return
