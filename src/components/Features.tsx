@@ -17,7 +17,7 @@ export default function Features() {
     },
     {
       title: 'Cập Nhật Liên Tục',
-      description: 'Thường xuyên cập nhật để tương thích với các miniapp mới',
+      description: 'Thường xuyên cập nhật để tương thích với các miniapp telegram mới',
       icon: '🔄'
     }
   ]
