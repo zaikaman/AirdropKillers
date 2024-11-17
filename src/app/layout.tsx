@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Airdrop Killers - Công Cụ',
+  title: 'Airdrop Killers - Tool Auto Click Telegram',
   description: 'Công cụ hỗ trợ Airdrop',
   icons: {
     icon: '/logo.png',
