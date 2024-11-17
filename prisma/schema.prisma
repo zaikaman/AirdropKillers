@@ -24,6 +24,7 @@ model Tool {
   activated   Boolean  @default(false)
   hardwareId  String?
   userId      String
+  productSlug String
   user        User     @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
