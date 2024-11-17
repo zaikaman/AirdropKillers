@@ -76,7 +76,7 @@ export default function ContactPage() {
                 <p>⚠️ Airdrop Killers chỉ có duy nhất 2 kênh liên lạc chính thức trên Telegram như trên.</p>
                 <p>⚠️ Chúng tôi không có số điện thoại hay hotline hỗ trợ.</p>
                 <p>⚠️ Tuyệt đối không tin các tài khoản mạo danh để tránh bị lừa đảo.</p>
-                <p>✅ Mọi giao dịch mua tool chỉ được thực hiện thông qua các admin trong group chat chính thức.</p>
+                <p>✅ Mọi giao dịch mua tool chỉ được thực hiện thông qua trang web chính thức của chúng tôi.</p>
               </div>
             </div>
           </SlideIn>
