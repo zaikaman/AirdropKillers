@@ -51,14 +51,15 @@ function CheckoutContent() {
       const data = await res.json()
       
       if (!res.ok) {
-        alert(data.error || 'Có lỗi xảy ra')
+        alert(data.error + (data.details ? `\n${data.details}` : ''))
         return
       }
 
       // Chuyển hướng sau khi thành công
       window.location.href = '/dashboard'
-    } catch {
-      alert('Có lỗi xảy ra')
+    } catch (error) {
+      console.error('Client error:', error)
+      alert('Có lỗi xảy ra khi gọi API')
     } finally {
       setIsLoading(false)
     }

@@ -23,6 +23,9 @@ export async function POST(req: Request) {
     const decoded = jwt.verify(token, "airdrop-killers-secret-key") as { userId: string }
     const { productSlug } = await req.json()
     
+    console.log('Product slug:', productSlug)
+    console.log('User ID:', decoded.userId)
+    
     if (!['kuroro', 'blum'].includes(productSlug)) {
       return NextResponse.json({ error: 'Invalid product' }, { status: 400 })
     }
@@ -34,6 +37,8 @@ export async function POST(req: Request) {
       }
     })
 
+    console.log('Existing tool:', existingTool)
+
     if (existingTool) {
       return NextResponse.json({ 
         error: 'Bạn đã có key cho tool này' 
@@ -43,12 +48,15 @@ export async function POST(req: Request) {
     const keyPrefix = productSlug.toUpperCase()
     const key = `${keyPrefix}-${generateRandomPart()}-${generateRandomPart()}-${generateRandomPart()}`
     
+    console.log('Generated key:', key)
+
     await prisma.tool.create({
       data: {
         name: productSlug === 'kuroro' ? 'Kuroro' : 'Blum',
         key,
         activated: true,
-        userId: decoded.userId
+        userId: decoded.userId,
+        productSlug
       }
     })
 
@@ -56,7 +64,11 @@ export async function POST(req: Request) {
       key,
       downloadUrl: downloadUrls[productSlug as ProductSlug]
     })
-  } catch {
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  } catch (error) {
+    console.error('Server error:', error)
+    return NextResponse.json({ 
+      error: 'Server error', 
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
   }
 } 
