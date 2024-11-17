@@ -24,7 +24,9 @@ export default function Hero() {
               Mua Tool Ngay
             </Link>
             <Link
-              href="#demo"
+              href="https://www.youtube.com/@AirdropKillers1706/videos"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-3 border border-primary text-primary hover:bg-primary/10 rounded-lg font-medium transition-all cursor-pointer select-none hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/30 active:translate-y-0 active:shadow-none transform"
             >
               Xem Demo
