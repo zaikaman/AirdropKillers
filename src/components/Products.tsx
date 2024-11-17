@@ -3,6 +3,7 @@
 import { products } from '@/data/products'
 import Link from 'next/link'
 import Image from 'next/image'
+import SlideIn from '@/components/SlideIn'
 
 export default function Products() {
   return (
@@ -17,35 +18,40 @@ export default function Products() {
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {products.map((product, index) => (
-            <Link 
-              href={`/products/${product.slug}`} 
+            <SlideIn 
               key={index}
-              className="bg-dark-light rounded-xl p-6 hover:border hover:border-primary/50 transition-all"
+              direction="up"
+              delay={index * 0.3}
             >
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={400}
-                height={300}
-                className="rounded-lg mb-6"
-              />
-              <h3 className="text-2xl font-bold mb-2">{product.name}</h3>
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-xl font-bold text-primary">{product.price}</span>
-                <span className="text-gray-400">{product.period}</span>
-              </div>
-              <p className="text-gray-400 mb-6">{product.description}</p>
-              <ul className="space-y-2 mb-6">
-                {product.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-gray-300">
-                    <svg className="w-5 h-5 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </Link>
+              <Link 
+                href={`/products/${product.slug}`} 
+                className="block bg-dark-light rounded-xl p-6 border border-gray-800 hover:border-primary/50 transition-all duration-300"
+              >
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  width={400}
+                  height={300}
+                  className="rounded-lg mb-6"
+                />
+                <h3 className="text-2xl font-bold mb-2">{product.name}</h3>
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="text-xl font-bold text-primary">{product.price}</span>
+                  <span className="text-gray-400">{product.period}</span>
+                </div>
+                <p className="text-gray-400 mb-6">{product.description}</p>
+                <ul className="space-y-2 mb-6">
+                  {product.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center text-gray-300">
+                      <svg className="w-5 h-5 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </Link>
+            </SlideIn>
           ))}
         </div>
       </div>

@@ -1,7 +1,11 @@
 'use client'
+
 import { useState } from 'react'
+import SlideIn from '@/components/SlideIn'
 
 export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  
   const faqs = [
     {
       question: 'Tool Auto Click Telegram Là Gì?',
@@ -25,43 +29,49 @@ export default function FAQ() {
     }
   ]
 
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
-
   return (
     <section className="py-24 bg-dark-light">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Câu Hỏi Thường Gặp</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Tất cả những điều bạn cần biết về công cụ tự động hóa airdrop của chúng tôi
-          </p>
-        </div>
+        <SlideIn>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Câu Hỏi Thường Gặp</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Tất cả những điều bạn cần biết về công cụ tự động hóa airdrop của chúng tôi
+            </p>
+          </div>
+        </SlideIn>
 
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq, index) => (
-            <div key={index} className="mb-4">
-              <button
-                className="w-full text-left p-4 bg-dark rounded-lg hover:bg-dark/50 transition-all"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              >
-                <div className="flex justify-between items-center">
-                  <span className="font-medium">{faq.question}</span>
-                  <svg
-                    className={`w-5 h-5 transform transition-transform ${
-                      openIndex === index ? 'rotate-180' : ''
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-                {openIndex === index && (
-                  <p className="mt-4 text-gray-400">{faq.answer}</p>
-                )}
-              </button>
-            </div>
+            <SlideIn 
+              key={index}
+              direction="right"
+              delay={index * 0.1}
+            >
+              <div className="mb-4">
+                <button
+                  className="w-full text-left p-4 bg-dark rounded-lg hover:bg-dark/50 transition-all"
+                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium">{faq.question}</span>
+                    <svg
+                      className={`w-5 h-5 transform transition-transform ${
+                        openIndex === index ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                  {openIndex === index && (
+                    <p className="mt-4 text-gray-400">{faq.answer}</p>
+                  )}
+                </button>
+              </div>
+            </SlideIn>
           ))}
         </div>
       </div>

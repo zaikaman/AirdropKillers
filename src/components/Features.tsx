@@ -1,3 +1,5 @@
+import SlideIn from './SlideIn'
+
 export default function Features() {
   const features = [
     {
@@ -25,23 +27,28 @@ export default function Features() {
   return (
     <section className="py-24 bg-dark-light">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Tính Năng Mạnh Mẽ</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Công cụ của chúng tôi được trang bị các tính năng tiên tiến để tối đa hóa thành công airdrop của bạn
-          </p>
-        </div>
+        <SlideIn>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Tính Năng Mạnh Mẽ</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Công cụ của chúng tôi được trang bị các tính năng tiên tiến để tối đa hóa thành công airdrop của bạn
+            </p>
+          </div>
+        </SlideIn>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <div 
-              key={index}
-              className="p-6 rounded-xl bg-dark border border-gray-800 hover:border-primary/50 transition-all duration-300"
+            <SlideIn 
+              key={index} 
+              direction="up" 
+              delay={index * 0.2}
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-400">{feature.description}</p>
-            </div>
+              <div className="p-6 rounded-xl bg-dark border border-gray-800 hover:border-primary/50 transition-all duration-300">
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-400">{feature.description}</p>
+              </div>
+            </SlideIn>
           ))}
         </div>
       </div>
