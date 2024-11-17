@@ -27,7 +27,7 @@ function CheckoutContent() {
     window.location.href = `/api/create-payment-link?product=${product.slug}&token=${token}`
   }
 
-  const handleDevGenerate = () => {
+  const handleDevGenerate = async () => {
     if (devPassword !== 'Tool17062004') {
       alert('Mật khẩu không đúng')
       return
@@ -39,30 +39,31 @@ function CheckoutContent() {
       return
     }
 
-    setIsLoading(true)
-    // Gọi trực tiếp API generate key
-    fetch('/api/tools/generate-key', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ productSlug })
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          alert(data.error)
-        } else {
-          router.push('/dashboard')
-        }
+    try {
+      setIsLoading(true)
+      const res = await fetch('/api/tools/generate-key', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ productSlug })
       })
-      .catch(() => {
-        alert('Có lỗi xảy ra')
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
+
+      const data = await res.json()
+      
+      if (!res.ok) {
+        alert(data.error || 'Có lỗi xảy ra')
+        return
+      }
+
+      // Chuyển hướng sau khi thành công
+      window.location.href = '/dashboard'
+    } catch (error) {
+      alert('Có lỗi xảy ra')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   if (!product) {
